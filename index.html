@@ -58,6 +58,14 @@
     .brand { font-weight: 800; letter-spacing: -.03em; color: var(--green); }
     .navlinks { display: flex; gap: 20px; font-size: 14px; }
     .navlinks a { color: var(--ink); text-decoration: none; }
+    .navlinks .sim-nav {
+      margin-left: 4px;
+      border-radius: 999px;
+      padding: 3px 10px;
+      color: white;
+      background: var(--red);
+      font-weight: 800;
+    }
     .print-btn {
       border: 1px solid var(--line);
       border-radius: 999px;
@@ -84,6 +92,24 @@
     h1 { max-width: 870px; margin: 18px 0 18px; font-size: clamp(42px, 7vw, 78px); }
     h1 em { color: var(--red); font-style: normal; }
     .lead { max-width: 760px; margin: 0; color: #4e5a55; font-size: clamp(17px, 2vw, 21px); }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 24px; }
+    .sim-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 2px solid var(--green);
+      border-radius: 999px;
+      padding: 11px 17px;
+      color: white;
+      background: var(--red);
+      box-shadow: 0 5px 0 var(--green);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+    .sim-cta:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--green); }
+    .sim-note { color: var(--muted); font-size: 13px; }
     .hero-grid { display: grid; grid-template-columns: 1.45fr .75fr; gap: 28px; align-items: end; }
     .stamp {
       position: relative;
@@ -306,7 +332,7 @@
 
     @media print {
       body { background: white; font-size: 11pt; }
-      .topbar, .print-btn, .profile-tabs, .reset { display: none !important; }
+      .topbar, .print-btn, .profile-tabs, .reset, .hero-actions { display: none !important; }
       .wrap { width: 100%; }
       .hero { padding: 0 0 20px; }
       h1 { font-size: 34pt; }
@@ -330,6 +356,7 @@
         <a href="#steps">步骤</a>
         <a href="#documents">材料</a>
         <a href="#sources">来源</a>
+        <a class="sim-nav" href="simulation.html">玩模拟器 ↗</a>
       </nav>
       <button class="print-btn" type="button" onclick="window.print()">打印 / 存 PDF</button>
     </div>
@@ -342,6 +369,10 @@
           <span class="eyebrow">中国普通护照 · 参会 + 同行旅游 · 90 天以内</span>
           <h1>去布拉格，申根签证<br><em>一步一步办。</em></h1>
           <p class="lead">你参加会议，按 MICE（会议会展）准备；女朋友不参会、只是陪同旅行，按 Tourism（个人旅游）准备。两份申请目的不同，但行程可以互相印证。</p>
+          <div class="hero-actions">
+            <a class="sim-cta" href="simulation.html"><span aria-hidden="true">🎮</span> 进入低多边形签证模拟器</a>
+            <span class="sim-note">先选角色，再沿地图完成 8 个关卡</span>
+          </div>
         </div>
         <aside class="stamp" aria-label="指南摘要">
           <small>Research edition</small>

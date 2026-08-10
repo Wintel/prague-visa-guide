@@ -121,6 +121,19 @@
     .mini-human .badge{position:absolute;left:35px;top:51px;width:19px;height:24px;border:2px solid #315f50;background:#fff}
     .mini-human .case{position:absolute;right:-1px;top:62px;width:25px;height:31px;border:3px solid #315f50;border-radius:4px;background:var(--gold)}
     .privacy-mini{margin-top:25px;color:#5d7169;font-size:12px}
+    .gate-back{
+      display:inline-flex;
+      margin-top:14px;
+      border:2px solid #315f50;
+      border-radius:8px;
+      padding:7px 11px;
+      color:var(--ink);
+      background:#fff;
+      box-shadow:3px 3px 0 #315f50;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:900;
+    }
 
     .hud{
       position:sticky;
@@ -152,6 +165,18 @@
     .hud-progress i{display:block;height:100%;width:12.5%;background:linear-gradient(90deg,#f2b642,#ef8059);transition:width .35s ease}
     .hud-progress b{font-size:12px;white-space:nowrap}
     .hud button{border:0;background:transparent;color:var(--teal);font-size:12px;font-weight:900}
+    .guide-link{
+      border:2px solid #315f50;
+      border-radius:8px;
+      padding:6px 9px;
+      color:var(--ink);
+      background:#fff;
+      box-shadow:2px 2px 0 #315f50;
+      text-decoration:none;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
 
     .game-shell{overflow:hidden;min-height:100vh;background:linear-gradient(var(--sky-a) 0 44%,#bde2a6 44% 100%)}
     .game-wrap{width:min(1200px,calc(100% - 28px));margin:auto;padding:24px 0 70px}
@@ -345,12 +370,14 @@
         </button>
       </div>
       <div class="privacy-mini">🛡 匿名模式：不输入姓名、护照号、生日、公司名或订单号；无统计脚本。</div>
+      <a class="gate-back" href="index.html">← 返回原版签证指南</a>
     </div>
   </section>
 
   <header class="hud">
     <div class="hud-inner">
       <div class="logo">VISA <span>PARK</span></div>
+      <a class="guide-link" href="index.html">← 返回指南</a>
       <div class="role-pill" id="rolePill">参会者</div>
       <div class="hud-progress"><div class="bar"><i id="hudBar"></i></div><b id="hudText">关卡 1 / 8</b></div>
       <a class="privacy-pill" href="#privacy">🛡 无个人信息</a>

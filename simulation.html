@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="匿名的捷克申根签证低多边形闯关模拟器：选择参会者或陪同旅游者，体验从材料准备到取回护照的流程。">
+  <meta name="referrer" content="no-referrer">
+  <title>Visa Park｜布拉格签证闯关模拟器</title>
+  <style>
+    :root {
+      --sky-a:#75c9e8;
+      --sky-b:#d9f1d2;
+      --grass:#86bd59;
+      --grass-dark:#5e9840;
+      --path:#f2d28f;
+      --ink:#17362f;
+      --paper:#fff9e9;
+      --cream:#f5edd2;
+      --red:#d85b4a;
+      --blue:#3784b8;
+      --teal:#1e7666;
+      --gold:#e7a83f;
+      --shadow:#204f4260;
+      --panel:#fffdf3;
+      --line:#d6cfb7;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:#dcefd3;
+      font-family:ui-rounded,"SF Pro Rounded",Inter,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      line-height:1.55;
+    }
+    button,input{font:inherit}
+    button{cursor:pointer}
+    a{color:var(--teal);text-underline-offset:3px}
+    [hidden]{display:none!important}
+
+    .role-gate{
+      position:fixed;
+      inset:0;
+      z-index:100;
+      display:grid;
+      place-items:center;
+      padding:24px;
+      overflow:auto;
+      background:
+        linear-gradient(180deg,rgba(65,148,188,.94),rgba(202,234,180,.96)),
+        #81c5df;
+    }
+    .role-gate::before,.role-gate::after{
+      content:"";
+      position:fixed;
+      border-radius:50%;
+      background:#ffffffb8;
+      filter:blur(1px);
+      animation:cloud 18s linear infinite;
+    }
+    .role-gate::before{width:180px;height:52px;top:12%;left:-200px;box-shadow:52px -20px 0 #ffffffb8,110px 4px 0 #ffffffb8}
+    .role-gate::after{width:140px;height:42px;top:64%;left:-170px;box-shadow:40px -15px 0 #ffffffa8,88px 3px 0 #ffffffa8;animation-duration:26s;animation-delay:-9s}
+    @keyframes cloud{to{transform:translateX(calc(100vw + 420px))}}
+    .gate-card{
+      position:relative;
+      z-index:1;
+      width:min(920px,100%);
+      padding:34px;
+      border:4px solid #315f50;
+      border-radius:26px;
+      background:var(--paper);
+      box-shadow:0 12px 0 #315f50,0 28px 70px #25554866;
+      text-align:center;
+    }
+    .pixel-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:2px solid #315f50;
+      border-radius:8px;
+      padding:5px 10px;
+      color:#fff;
+      background:var(--teal);
+      box-shadow:3px 3px 0 #315f50;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .gate-card h1{margin:20px 0 7px;font-size:clamp(34px,6vw,62px);line-height:1;letter-spacing:-.055em}
+    .gate-card>p{margin:0 auto 26px;max-width:620px;color:#587068}
+    .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .role-card{
+      position:relative;
+      display:grid;
+      grid-template-columns:110px 1fr;
+      align-items:center;
+      gap:16px;
+      min-height:180px;
+      padding:22px;
+      border:3px solid #315f50;
+      border-radius:18px;
+      color:var(--ink);
+      background:#fffdf5;
+      box-shadow:0 7px 0 #315f50;
+      text-align:left;
+      transition:transform .16s ease,box-shadow .16s ease;
+    }
+    .role-card:hover,.role-card:focus-visible{transform:translateY(-4px);box-shadow:0 11px 0 #315f50;outline:3px solid #fff;outline-offset:2px}
+    .role-card h2{margin:0 0 5px;font-size:24px}
+    .role-card p{margin:0;color:#62736d;font-size:14px}
+    .role-card small{display:block;margin-top:11px;color:var(--red);font-weight:900}
+    .mini-human{position:relative;width:82px;height:125px;margin:auto;filter:drop-shadow(6px 8px 0 #27493b2d)}
+    .mini-human .head{position:absolute;left:24px;top:3px;width:38px;height:38px;border:3px solid #315f50;border-radius:9px 9px 14px 14px;background:#edbd91;transform:rotate(-3deg)}
+    .mini-human .hair{position:absolute;left:23px;top:0;width:42px;height:18px;border:3px solid #315f50;border-radius:10px 10px 4px 4px;background:#563d31}
+    .mini-human .body{position:absolute;left:17px;top:41px;width:52px;height:53px;border:3px solid #315f50;border-radius:9px;background:var(--blue);transform:skewY(-4deg)}
+    .mini-human.tour .body{background:var(--red)}
+    .mini-human .leg{position:absolute;top:91px;width:19px;height:31px;border:3px solid #315f50;border-radius:3px;background:#496a76}
+    .mini-human .leg.a{left:20px;transform:rotate(5deg)}
+    .mini-human .leg.b{left:48px;transform:rotate(-4deg)}
+    .mini-human .badge{position:absolute;left:35px;top:51px;width:19px;height:24px;border:2px solid #315f50;background:#fff}
+    .mini-human .case{position:absolute;right:-1px;top:62px;width:25px;height:31px;border:3px solid #315f50;border-radius:4px;background:var(--gold)}
+    .privacy-mini{margin-top:25px;color:#5d7169;font-size:12px}
+
+    .hud{
+      position:sticky;
+      top:0;
+      z-index:50;
+      border-bottom:4px solid #315f50;
+      background:#fff9e7ed;
+      backdrop-filter:blur(10px);
+    }
+    .hud-inner{width:min(1200px,calc(100% - 28px));min-height:64px;margin:auto;display:flex;align-items:center;gap:16px}
+    .logo{font-size:20px;font-weight:1000;letter-spacing:-.04em;white-space:nowrap}
+    .logo span{color:var(--red)}
+    .role-pill,.privacy-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      border:2px solid #315f50;
+      border-radius:8px;
+      padding:6px 10px;
+      background:#fff;
+      box-shadow:2px 2px 0 #315f50;
+      font-size:12px;
+      font-weight:900;
+    }
+    .role-pill{color:#fff;background:var(--blue)}
+    .role-pill.tourist{background:var(--red)}
+    .hud-progress{flex:1;display:flex;align-items:center;gap:10px;min-width:120px}
+    .hud-progress .bar{overflow:hidden;flex:1;height:12px;border:2px solid #315f50;border-radius:999px;background:#e3dec9}
+    .hud-progress i{display:block;height:100%;width:12.5%;background:linear-gradient(90deg,#f2b642,#ef8059);transition:width .35s ease}
+    .hud-progress b{font-size:12px;white-space:nowrap}
+    .hud button{border:0;background:transparent;color:var(--teal);font-size:12px;font-weight:900}
+
+    .game-shell{overflow:hidden;min-height:100vh;background:linear-gradient(var(--sky-a) 0 44%,#bde2a6 44% 100%)}
+    .game-wrap{width:min(1200px,calc(100% - 28px));margin:auto;padding:24px 0 70px}
+    .game-title{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:6px 0 14px;color:#fff;text-shadow:0 3px 0 #315f50}
+    .game-title h1{margin:0;font-size:clamp(26px,4.3vw,50px);letter-spacing:-.05em;line-height:1}
+    .game-title p{margin:4px 0 0;font-weight:800}
+    .season{border:2px solid #315f50;border-radius:8px;padding:7px 10px;color:var(--ink);background:#fff8d4;box-shadow:3px 3px 0 #315f50;text-shadow:none;font-size:12px;font-weight:900;white-space:nowrap}
+
+    .scene{
+      position:relative;
+      overflow:hidden;
+      aspect-ratio:1000/555;
+      min-height:430px;
+      border:4px solid #315f50;
+      border-radius:24px;
+      background:linear-gradient(#8bd3ee 0 37%,#bce5aa 37%);
+      box-shadow:0 10px 0 #315f50,0 25px 60px #214f3e5e;
+      isolation:isolate;
+    }
+    .scene-svg{position:absolute;inset:0;width:100%;height:100%}
+    .cloud{animation:floatCloud 22s linear infinite}
+    .cloud.slow{animation-duration:31s;animation-delay:-12s}
+    @keyframes floatCloud{0%{transform:translateX(-130px)}100%{transform:translateX(1150px)}}
+    .plane{transform-origin:center;animation:fly 12s ease-in-out infinite}
+    @keyframes fly{0%,100%{transform:translate(-30px,8px) rotate(-2deg)}50%{transform:translate(170px,-18px) rotate(2deg)}}
+    .tree-top{transform-box:fill-box;transform-origin:center bottom;animation:sway 3.2s ease-in-out infinite alternate}
+    @keyframes sway{to{transform:rotate(2deg)}}
+
+    .route-node{
+      position:absolute;
+      z-index:8;
+      width:64px;
+      height:64px;
+      transform:translate(-50%,-50%);
+      border:3px solid #315f50;
+      border-radius:50%;
+      color:#315f50;
+      background:#fff6cf;
+      box-shadow:0 6px 0 #315f50,0 9px 16px #274c3e44;
+      font-size:18px;
+      font-weight:1000;
+      transition:transform .18s ease,background .18s ease;
+    }
+    .route-node:hover{transform:translate(-50%,-55%)}
+    .route-node.done{color:#fff;background:var(--teal)}
+    .route-node.current{color:#fff;background:var(--red);animation:pulse 1.4s ease-in-out infinite}
+    @keyframes pulse{50%{box-shadow:0 6px 0 #315f50,0 0 0 10px #fff7bf77}}
+    .route-node span{
+      position:absolute;
+      left:50%;
+      top:70px;
+      width:104px;
+      transform:translateX(-50%);
+      border:2px solid #315f50;
+      border-radius:6px;
+      padding:3px 5px;
+      color:var(--ink);
+      background:#fffdf2e8;
+      box-shadow:2px 2px 0 #315f50;
+      font-size:11px;
+      line-height:1.15;
+    }
+    .avatar{
+      --shirt:var(--blue);
+      position:absolute;
+      z-index:12;
+      width:48px;
+      height:74px;
+      transform:translate(-50%,-100%);
+      transition:left .9s cubic-bezier(.35,.8,.25,1),top .9s cubic-bezier(.35,.8,.25,1);
+      filter:drop-shadow(6px 8px 0 #244a3d33);
+      pointer-events:none;
+    }
+    .avatar.tourist{--shirt:var(--red)}
+    .avatar .a-head{position:absolute;left:12px;top:0;width:25px;height:25px;border:3px solid #315f50;border-radius:7px 7px 10px 10px;background:#efbe91}
+    .avatar .a-hair{position:absolute;left:11px;top:-3px;width:28px;height:12px;border:3px solid #315f50;border-radius:8px 8px 3px 3px;background:#543a2d}
+    .avatar .a-body{position:absolute;left:7px;top:24px;width:35px;height:30px;border:3px solid #315f50;border-radius:6px;background:var(--shirt)}
+    .avatar .a-leg{position:absolute;top:52px;width:13px;height:20px;border:3px solid #315f50;border-radius:2px;background:#466570}
+    .avatar .a-leg.one{left:9px}.avatar .a-leg.two{left:27px}
+    .avatar .a-bag{position:absolute;right:-6px;top:33px;width:16px;height:21px;border:3px solid #315f50;border-radius:3px;background:var(--gold)}
+    .avatar.walking .a-body{animation:bob .22s linear 4 alternate}
+    .avatar.walking .a-leg.one{animation:walkA .22s linear 4 alternate}.avatar.walking .a-leg.two{animation:walkB .22s linear 4 alternate}
+    @keyframes bob{to{transform:translateY(-3px)}}
+    @keyframes walkA{to{transform:rotate(15deg)}}@keyframes walkB{to{transform:rotate(-15deg)}}
+    .scene-caption{position:absolute;right:12px;bottom:12px;z-index:15;border:2px solid #315f50;border-radius:7px;padding:5px 8px;background:#fff9dfd9;font-size:10px;font-weight:900}
+
+    .dashboard{display:grid;grid-template-columns:1.5fr .7fr;gap:18px;margin-top:28px}
+    .panel{
+      border:3px solid #315f50;
+      border-radius:18px;
+      background:var(--panel);
+      box-shadow:0 7px 0 #315f50;
+    }
+    .mission{padding:26px}
+    .mission-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:18px;border-bottom:2px dashed var(--line)}
+    .mission-id{color:var(--red);font-size:12px;font-weight:1000;letter-spacing:.1em;text-transform:uppercase}
+    .mission h2{margin:4px 0 5px;font-size:clamp(24px,3vw,36px);line-height:1.05;letter-spacing:-.04em}
+    .mission-sub{margin:0;color:#60736c}
+    .reward{min-width:84px;border:2px solid #315f50;border-radius:9px;padding:8px;color:#6a5019;background:#ffdfa0;box-shadow:3px 3px 0 #315f50;text-align:center;font-size:11px;font-weight:1000}
+    .task-list{display:grid;gap:9px;margin:20px 0}
+    .task{
+      display:grid;
+      grid-template-columns:24px 1fr;
+      align-items:start;
+      gap:10px;
+      padding:11px 12px;
+      border:2px solid #ded6bd;
+      border-radius:10px;
+      background:#fffefa;
+    }
+    .task input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--teal)}
+    .task label{cursor:pointer}
+    .task small{display:block;margin-top:2px;color:#718078}
+    .tip{padding:13px 15px;border-left:5px solid var(--gold);border-radius:8px;background:#fff1c9;color:#68593c;font-size:13px}
+    .mission-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px}
+    .btn{
+      border:3px solid #315f50;
+      border-radius:9px;
+      padding:10px 15px;
+      color:#fff;
+      background:var(--teal);
+      box-shadow:0 5px 0 #315f50;
+      font-weight:1000;
+      transition:transform .15s,box-shadow .15s;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 #315f50}
+    .btn:active{transform:translateY(3px);box-shadow:0 2px 0 #315f50}
+    .btn.secondary{color:var(--ink);background:#fff}
+    .btn[disabled]{cursor:not-allowed;opacity:.38}
+    .source-link{font-size:12px;font-weight:900}
+
+    .side-stack{display:grid;gap:18px;align-content:start}
+    .side-panel{padding:20px}
+    .side-panel h3{margin:0 0 11px;font-size:18px}
+    .side-panel ul{margin:0;padding-left:18px;color:#5f716a;font-size:13px}
+    .side-panel li+li{margin-top:8px}
+    .privacy-panel{background:#eaf6ec}
+    .privacy-panel .shield{display:grid;place-items:center;width:42px;height:42px;margin-bottom:10px;border:2px solid #315f50;border-radius:10px;background:#9ad19d;font-size:22px;box-shadow:3px 3px 0 #315f50}
+    .privacy-panel p{margin:0;color:#587069;font-size:13px}
+    .privacy-panel code{font-family:inherit;font-weight:900}
+    .clear-data{margin-top:12px;border:0;padding:0;color:var(--red);background:transparent;font-size:12px;font-weight:1000}
+
+    .reference-zone{margin-top:28px;padding:24px}
+    .reference-zone h2{margin:0 0 5px;font-size:24px}
+    .reference-zone>p{margin:0 0 17px;color:#66766f;font-size:13px}
+    .source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .source-card{display:block;border:2px solid #d7cfb5;border-radius:10px;padding:12px;color:var(--ink);background:#fff;text-decoration:none;font-size:12px;font-weight:900}
+    .source-card:hover{border-color:var(--teal);background:#f2fff4}
+    .source-card small{display:block;margin-top:4px;color:#74827c;font-weight:500}
+    footer{padding:22px 0 10px;color:#315f50;text-align:center;font-size:12px;font-weight:800}
+
+    .toast{position:fixed;left:50%;bottom:24px;z-index:90;transform:translate(-50%,120px);border:3px solid #315f50;border-radius:10px;padding:10px 16px;color:#fff;background:var(--teal);box-shadow:0 5px 0 #315f50;font-weight:900;transition:transform .3s ease}
+    .toast.show{transform:translate(-50%,0)}
+
+    @media(max-width:850px){
+      .role-grid,.dashboard,.source-grid{grid-template-columns:1fr}
+      .role-card{grid-template-columns:85px 1fr}.mini-human{transform:scale(.84)}
+      .scene{min-height:390px;aspect-ratio:auto}.scene-svg{min-width:760px;left:50%;transform:translateX(-50%)}
+      .route-node{width:52px;height:52px;font-size:15px}.route-node span{top:58px;width:82px;font-size:9px}
+      .hud-inner{gap:9px}.privacy-pill{display:none}
+    }
+    @media(max-width:540px){
+      .gate-card{padding:24px 16px}.role-card{grid-template-columns:1fr;text-align:center}.mini-human{height:108px}
+      .hud-progress b{display:none}.logo{font-size:16px}.hud-inner{width:calc(100% - 16px)}
+      .game-wrap{width:calc(100% - 16px);padding-top:14px}.game-title{align-items:flex-start}.season{display:none}
+      .scene{min-height:360px;border-radius:16px}.scene-svg{min-width:700px}
+      .route-node{width:45px;height:45px;border-width:2px;box-shadow:0 4px 0 #315f50}.route-node span{display:none}
+      .avatar{transform:translate(-50%,-86%) scale(.82)}
+      .mission{padding:19px}.mission-head{display:block}.reward{margin-top:12px;width:82px}
+      .mission-actions{flex-wrap:wrap}.source-link{width:100%;order:3}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+    }
+  </style>
+</head>
+<body>
+  <section class="role-gate" id="roleGate" aria-labelledby="gateTitle">
+    <div class="gate-card">
+      <span class="pixel-label">◆ Visa Park · New Game</span>
+      <h1 id="gateTitle">选择你的旅行角色</h1>
+      <p>两个人去同一个地方，也可能走不同的签证任务线。请选择要体验的角色；随时可以切换。</p>
+      <div class="role-grid">
+        <button class="role-card" type="button" data-role="mice">
+          <span class="mini-human" aria-hidden="true"><i class="head"></i><i class="hair"></i><i class="body"></i><i class="leg a"></i><i class="leg b"></i><i class="badge"></i><i class="case"></i></span>
+          <span><h2>参会者</h2><p>赴捷克参加会议或会展，走 MICE 任务线。</p><small>关键道具：邀请函 + 派遣函</small></span>
+        </button>
+        <button class="role-card" type="button" data-role="tourist">
+          <span class="mini-human tour" aria-hidden="true"><i class="head"></i><i class="hair"></i><i class="body"></i><i class="leg a"></i><i class="leg b"></i><i class="case"></i></span>
+          <span><h2>陪同旅游者</h2><p>不参会，只是同行游览，走 Tourism 任务线。</p><small>关键道具：行程单 + 个人财力</small></span>
+        </button>
+      </div>
+      <div class="privacy-mini">🛡 匿名模式：不输入姓名、护照号、生日、公司名或订单号；无统计脚本。</div>
+    </div>
+  </section>
+
+  <header class="hud">
+    <div class="hud-inner">
+      <div class="logo">VISA <span>PARK</span></div>
+      <div class="role-pill" id="rolePill">参会者</div>
+      <div class="hud-progress"><div class="bar"><i id="hudBar"></i></div><b id="hudText">关卡 1 / 8</b></div>
+      <a class="privacy-pill" href="#privacy">🛡 无个人信息</a>
+      <button type="button" id="switchRole">切换角色</button>
+    </div>
+  </header>
+
+  <main class="game-shell" id="game" aria-hidden="true">
+    <div class="game-wrap">
+      <div class="game-title">
+        <div><h1>布拉格签证任务线</h1><p id="routeSubtitle">MICE / 会议会展</p></div>
+        <div class="season">示例规划 · T−8 周 → 出发</div>
+      </div>
+
+      <section class="scene" aria-label="签证流程低多边形地图">
+        <svg class="scene-svg" viewBox="0 0 1000 555" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="water" x1="0" x2="1"><stop stop-color="#4eb2cf"/><stop offset="1" stop-color="#2b88b5"/></linearGradient>
+            <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9dce70"/><stop offset="1" stop-color="#68a448"/></linearGradient>
+          </defs>
+          <circle cx="875" cy="70" r="42" fill="#ffe58b" stroke="#315f50" stroke-width="4"/>
+          <g class="cloud" fill="#fff" stroke="#315f50" stroke-width="3"><path d="M-110 100h105c12-30 59-31 72 0 31-4 47 31 21 46H-110z"/></g>
+          <g class="cloud slow" fill="#fff" stroke="#315f50" stroke-width="3"><path d="M90 54h83c11-25 46-24 59 0 26-4 40 25 18 39H90z"/></g>
+          <g class="plane"><path d="M90 135l92-20 20 9-57 27-23 31-14 3 9-31-42 3-12-9z" fill="#fff9df" stroke="#315f50" stroke-width="4"/><path d="M145 151l57-27-11 25z" fill="#d85b4a"/></g>
+          <path d="M0 245L170 190 370 220 560 178 780 215 1000 175V555H0z" fill="url(#ground)"/>
+          <path d="M-20 460C180 360 285 505 474 410S750 300 1020 390V555H-20z" fill="url(#water)" stroke="#315f50" stroke-width="4"/>
+          <path d="M45 418C180 335 280 415 400 365S680 260 944 290" fill="none" stroke="#315f50" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M45 412C180 329 280 409 400 359S680 254 944 284" fill="none" stroke="#f2d28f" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 4"/>
+          <g transform="translate(390 280)"><path d="M0 40l74-31 78 32-76 34z" fill="#dc7e55" stroke="#315f50" stroke-width="4"/><path d="M10 42v79l65 32V74z" fill="#f3d7a5" stroke="#315f50" stroke-width="4"/><path d="M75 74l67-29v78l-67 30z" fill="#d9b67d" stroke="#315f50" stroke-width="4"/><path d="M41 82h22v41H41z" fill="#6da5b4" stroke="#315f50" stroke-width="3"/><text x="77" y="52" text-anchor="middle" fill="#315f50" font-size="15" font-weight="900">VFS</text></g>
+          <g transform="translate(780 95)"><path d="M30 180h150v96H30z" fill="#f1d3a4" stroke="#315f50" stroke-width="4"/><path d="M16 180l90-54 91 54z" fill="#d85b4a" stroke="#315f50" stroke-width="4"/><path d="M95 36h31v106H95z" fill="#f0c68b" stroke="#315f50" stroke-width="4"/><path d="M87 38l24-37 24 37z" fill="#315f50"/><circle cx="111" cy="61" r="11" fill="#fff6cf" stroke="#315f50" stroke-width="3"/><path d="M111 61v-7m0 7l7 4" stroke="#315f50" stroke-width="3"/><path d="M52 209h27v67H52zm79 0h27v67h-27z" fill="#6f9da8" stroke="#315f50" stroke-width="3"/></g>
+          <g transform="translate(570 160)"><path d="M0 80h170l-20 28H20z" fill="#bc7656" stroke="#315f50" stroke-width="4"/><path d="M15 108h142v68H15z" fill="#eed09a" stroke="#315f50" stroke-width="4"/><path d="M32 128h28v48H32zm50 0h28v48H82zm50 0h15v48h-15z" fill="#72a6b5" stroke="#315f50" stroke-width="3"/><text x="85" y="100" text-anchor="middle" fill="#315f50" font-size="13" font-weight="900">CONSULATE</text></g>
+          <g transform="translate(110 270)"><path d="M0 70h130v90H0z" fill="#f2d8a9" stroke="#315f50" stroke-width="4"/><path d="M-8 70L65 25l74 45z" fill="#d85b4a" stroke="#315f50" stroke-width="4"/><path d="M48 93h35v67H48z" fill="#6e9fab" stroke="#315f50" stroke-width="3"/><text x="65" y="84" text-anchor="middle" fill="#315f50" font-size="13" font-weight="900">HOME</text></g>
+          <g transform="translate(235 200)"><rect x="0" y="40" width="110" height="110" rx="4" fill="#e7c28a" stroke="#315f50" stroke-width="4"/><path d="M-7 42h124L87 8H22z" fill="#668d9c" stroke="#315f50" stroke-width="4"/><path d="M20 70h28v29H20zm44 0h28v29H64z" fill="#a9d4d6" stroke="#315f50" stroke-width="3"/><path d="M40 115h31v35H40z" fill="#8b6652" stroke="#315f50" stroke-width="3"/><text x="55" y="64" text-anchor="middle" fill="#315f50" font-size="12" font-weight="900">DOCS</text></g>
+          <g transform="translate(80 208)"><path class="tree-top" d="M28 0L0 70h56z" fill="#397d49" stroke="#315f50" stroke-width="4"/><path d="M22 69h12v35H22z" fill="#8d6344" stroke="#315f50" stroke-width="3"/></g>
+          <g transform="translate(710 292)"><path class="tree-top" d="M30 0L0 75h60z" fill="#397d49" stroke="#315f50" stroke-width="4"/><path d="M24 74h12v36H24z" fill="#8d6344" stroke="#315f50" stroke-width="3"/></g>
+          <g transform="translate(310 390)"><path class="tree-top" d="M25 0L0 65h50z" fill="#4b8d4e" stroke="#315f50" stroke-width="4"/><path d="M20 64h10v30H20z" fill="#8d6344" stroke="#315f50" stroke-width="3"/></g>
+        </svg>
+        <div id="nodes"></div>
+        <div class="avatar" id="avatar" aria-hidden="true"><i class="a-head"></i><i class="a-hair"></i><i class="a-body"></i><i class="a-leg one"></i><i class="a-leg two"></i><i class="a-bag"></i></div>
+        <div class="scene-caption">原创低多边形场景 · 无第三方素材</div>
+      </section>
+
+      <section class="dashboard">
+        <article class="panel mission" aria-live="polite">
+          <div class="mission-head">
+            <div><span class="mission-id" id="missionId">Mission 01</span><h2 id="missionTitle">确认路线</h2><p class="mission-sub" id="missionSub"></p></div>
+            <div class="reward" id="reward">+100<br>准备度</div>
+          </div>
+          <div class="task-list" id="taskList"></div>
+          <div class="tip" id="tip"></div>
+          <div class="mission-actions">
+            <button class="btn secondary" type="button" id="prevBtn">← 上一关</button>
+            <a class="source-link" id="missionSource" href="#" target="_blank" rel="noopener noreferrer">查看本关官方依据 ↗</a>
+            <button class="btn" type="button" id="nextBtn">完成本关 →</button>
+          </div>
+        </article>
+
+        <aside class="side-stack">
+          <section class="panel side-panel">
+            <h3>🤝 同行协作规则</h3>
+            <ul>
+              <li>两人分别预约、填表、准备财力和职业材料。</li>
+              <li>航班与酒店可相同，酒店单最好显示两人姓名。</li>
+              <li>双方说明信可匿名写“同行者”，线上展示不要放真实护照号。</li>
+              <li>参会者走 MICE；不参会的陪同者走 Tourism。</li>
+              <li>谁承担费用，必须在所有材料中保持一致。</li>
+            </ul>
+          </section>
+          <section class="panel side-panel privacy-panel" id="privacy">
+            <div class="shield">🛡</div>
+            <h3>Privacy by design</h3>
+            <p>本页没有姓名、护照号、生日、公司、订单或精确出行日期输入框；没有统计、广告、Cookie 或第三方素材。只在本机 <code>localStorage</code> 保存角色、关卡与勾选状态。</p>
+            <button class="clear-data" type="button" id="clearData">清除本机匿名进度</button>
+          </section>
+        </aside>
+      </section>
+
+      <section class="panel reference-zone">
+        <h2>游戏规则来自哪里？</h2>
+        <p>模拟器只是流程演示，不替代官方清单。资料核对日期为 2026-08-10，递交前请再确认。</p>
+        <div class="source-grid">
+          <a class="source-card" href="https://visa.vfsglobal.com/one-pager/Czechrepublic/China/English/pdf/Checklist-for-short-stay-visas-in-China-Dec-25.pdf" target="_blank" rel="noopener noreferrer">中国短期签证完整清单<small>MICE、Tourism 与公共材料，中英 PDF</small></a>
+          <a class="source-card" href="https://mzv.gov.cz/beijing/en/consular_information/visas_1/specific_for_destination/index.html" target="_blank" rel="noopener noreferrer">捷克驻华使馆签证页<small>申请国判断与按目的材料</small></a>
+          <a class="source-card" href="https://visa.vfsglobal.com/chn/en/cze/apply-visa" target="_blank" rel="noopener noreferrer">VFS 中国申请步骤<small>预约、递交、追踪与取件</small></a>
+          <a class="source-card" href="https://visa.vfsglobal.com/chn/zh/cze/news/walk-in-service-notice" target="_blank" rel="noopener noreferrer">2026 北京领区预约通知<small>自 2026-05-01 起在线预约及预付服务费</small></a>
+          <a class="source-card" href="https://mzv.gov.cz/jnp/en/information_for_aliens/visa_fee_schedule/index.html" target="_blank" rel="noopener noreferrer">捷克外交部费用表<small>成人 €90、6–11 岁 €45</small></a>
+          <a class="source-card" href="https://eur-lex.europa.eu/eli/reg/2009/810" target="_blank" rel="noopener noreferrer">欧盟签证法典<small>护照、生物信息与处理时限</small></a>
+        </div>
+      </section>
+
+      <footer>Visa Park 是匿名流程模拟，不提供获签保证，也不储存申请材料。</footer>
+    </div>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    const SOURCE = {
+      checklist: 'https://visa.vfsglobal.com/one-pager/Czechrepublic/China/English/pdf/Checklist-for-short-stay-visas-in-China-Dec-25.pdf',
+      embassy: 'https://mzv.gov.cz/beijing/en/consular_information/visas_1/specific_for_destination/index.html',
+      apply: 'https://visa.vfsglobal.com/chn/en/cze/apply-visa',
+      appointment: 'https://visa.vfsglobal.com/chn/zh/cze/news/walk-in-service-notice',
+      centre: 'https://visa.vfsglobal.com/chn/en/cze/attend-centre/what-happens-at-centre',
+      fees: 'https://mzv.gov.cz/jnp/en/information_for_aliens/visa_fee_schedule/index.html',
+      code: 'https://eur-lex.europa.eu/eli/reg/2009/810'
+    };
+
+    const shared = [
+      {
+        label:'选路径', title:'确认申请国与签证类型',
+        sub:'只去捷克，目的地判断很简单：申请捷克短期申根 C 类签证。',
+        tasks:[['确认只去捷克','捷克是唯一目的地，因此向捷克申请。'],['确认停留不超过 90/180','超过 90 天将进入捷克长期签证流程。'],['选择真实目的类别','参会者选 MICE；不参会的陪同者选 Tourism。']],
+        tip:'同一趟旅行中的两个人可以选择不同子类别，关键是各自真实目的与材料一致。', source:SOURCE.embassy
+      },
+      null,
+      null,
+      {
+        label:'预约', title:'在线预约正确类别',
+        sub:'两人分别预约；领区、签证中心和类别都要选对。',
+        tasks:[['按户口、居住或适用记录确认领区','上海、江苏、安徽、浙江属上海领区；其余大陆省区市属北京领区。'],['为每名申请人分别预约','保存预约确认信，不能用一份预约代替两人。'],['核对预约类别','参会者选择 MICE；陪同者选择 Tourism。']],
+        tip:'北京领区自 2026-05-01 起，个人申请要求在线预约，并在预约时预付 VFS 服务费。', source:SOURCE.appointment
+      },
+      {
+        label:'材料包', title:'整理独立材料包',
+        sub:'把公共材料与角色专属材料合并，每人一套、按清单排序。',
+        tasks:[['申请表、VFS 同意书与预约信','英文填表并按要求签名；不要在网页或公开附件中展示真实表格。'],['护照、户口簿、照片','护照离开申根后至少有效 3 个月、至少 2 页空白页；户口簿整本复印。'],['旅行医疗保险','覆盖全部申根国及全程，保额至少 €30,000，含急诊、医疗遣返及死亡遗体遣返。'],['原件与复印件分组','两人的银行流水、职业证明和保险均各自准备。']],
+        tip:'共同酒店预订单最好显示两人姓名；线上演示或分享时用“旅客 A / 旅客 B”替代真实姓名。', source:SOURCE.checklist
+      },
+      {
+        label:'到场', title:'到 VFS 递交与录指纹',
+        sub:'带齐纸质材料，提前到场，完成生物信息采集。',
+        tasks:[['提前约 15 分钟到达','携带预约信、护照、全部原件和复印件。'],['提交十指指纹与现场照片','12 岁以下免指纹；此前 VIS 指纹未满 59 个月通常可复用，但仍以现场要求为准。'],['保留缴费与受理收据','签证费 12 岁及以上 €90，6–11 岁 €45；另有 VFS 服务费。']],
+        tip:'快递、短信、贵宾厅等增值服务不会提高获签率，也不会改变领馆审理优先级。', source:SOURCE.centre
+      },
+      {
+        label:'审理', title:'等待审理并响应补件',
+        sub:'用 VFS 受理编号查询状态，不在公开网页或聊天截图中暴露编号。',
+        tasks:[['保存编号但不公开','受理编号属于个人申请信息，只在 VFS 官方查询页使用。'],['关注邮件与电话','领馆可要求补件或面谈。'],['预留足够时间','通常为领馆收到申请后 15 个日历日；个案可延至最多 45 日。']],
+        tip:'VFS 转送和护照返还时间不包含在领馆审理时限内，因此不要拖到出发前 15 天才递交。', source:SOURCE.code
+      },
+      {
+        label:'取签', title:'取回护照并检查贴纸',
+        sub:'拿到结果后，检查签证信息并准备入境材料。',
+        tasks:[['核对签证贴纸','姓名、护照号、有效期、入境次数和允许停留天数。'],['准备随身材料','机酒、行程、保险、会议邀请或其他目的证明、资金证明。'],['行程有重大变化时及时处理','签证不等于自动获准入境，边检可再次核查旅行条件。']],
+        tip:'公开分享成果时只展示模拟贴纸，不拍摄或上传真实护照与签证页。', source:SOURCE.embassy
+      }
+    ];
+
+    const roleStages = {
+      mice: {
+        name:'参会者', route:'MICE / 会议会展',
+        stages:{
+          1:{label:'邀请函',title:'拿到合规会议邀请函',sub:'主办方邀请函是证明会议目的的核心道具。',tasks:[['主办方官方抬头纸','文件应盖章并由有职务的人员签字。'],['完整写明会议信息','机构地址与联系方式、签字人姓名职务、访问目的、时长和详细日程。'],['明确费用承担与回国担保','写明谁承担旅行及生活费、担保人是否为回国提供经济担保。']],tip:'只有你真实参会并持有相应邀请/注册证明时才走 MICE；不要把陪同旅游者也写成参会人。',source:SOURCE.checklist},
+          2:{label:'派遣函',title:'证明职业、财力与派遣关系',sub:'让邀请方、雇主和个人资金三条证据链互相吻合。',tasks:[['最近 3 个月个人活期银行流水','不是只交定期存款证明；异常大额入账准备合理说明。'],['雇主营业执照盖章复印件','官方清单同时要求雇佣公司的偿付能力证明。'],['单位派遣函','抬头纸、盖章签字；含公司地址联系人、签字人、姓名职位工资工龄、出行目的、回国保留职位和费用承担方。']],tip:'邀请函写“主办方承担”，派遣函和申请表就不能写成完全个人自费；所有费用口径保持一致。',source:SOURCE.checklist}
+        }
+      },
+      tourist: {
+        name:'陪同旅游者', route:'Tourism / 个人旅游',
+        stages:{
+          1:{label:'行程',title:'建立真实旅游行程',sub:'不参会的陪同者以旅游为主要目的。',tasks:[['往返航班预订单','姓名和日期与申请表一致；结果出来前优先选择可取消或可改的真实预订。'],['覆盖全部夜晚的住宿证明','共同酒店最好体现两名入住者。'],['逐日旅行计划','列出城市、景点与交通；可如实说明与参会者同行，但不要冒充参会。']],tip:'未婚情侣不是“配偶”。陪同旅游者应选择 Tourism，而不是以不存在的亲属身份走探亲访友。',source:SOURCE.checklist},
+          2:{label:'财力',title:'证明个人财力与回国约束',sub:'旅游者要独立证明旅行可负担、行程结束会返回。',tasks:[['最近 3 个月个人活期银行流水','收入、余额与旅行预算应合理匹配。'],['准备对应职业材料','在职：营业执照盖章复印件 + 英文在职准假证明；退休或无业按清单提交相应证明。'],['如由同行者资助则如实说明','附资助说明和资助方财力；申请表、说明信与银行材料口径一致。']],tip:'能真实自费就按本人财力申报；不要为了“看起来更强”在自费、单位支付和伴侣资助之间互相矛盾。',source:SOURCE.checklist}
+        }
+      }
+    };
+
+    const positions = [
+      {x:8,y:74},{x:20,y:59},{x:34,y:69},{x:47,y:49},
+      {x:60,y:63},{x:73,y:46},{x:85,y:59},{x:94,y:38}
+    ];
+    const storageKey='visaParkAnonymousStateV1';
+    let state={role:null,step:0,checks:{mice:{},tourist:{}}};
+    try{const saved=JSON.parse(localStorage.getItem(storageKey));if(saved&&saved.checks)state={...state,...saved}}catch(_){ }
+
+    const gate=document.getElementById('roleGate');
+    const game=document.getElementById('game');
+    const nodesEl=document.getElementById('nodes');
+    const avatar=document.getElementById('avatar');
+    const rolePill=document.getElementById('rolePill');
+    const routeSubtitle=document.getElementById('routeSubtitle');
+    const taskList=document.getElementById('taskList');
+    const missionTitle=document.getElementById('missionTitle');
+    const missionSub=document.getElementById('missionSub');
+    const missionId=document.getElementById('missionId');
+    const tip=document.getElementById('tip');
+    const source=document.getElementById('missionSource');
+    const prevBtn=document.getElementById('prevBtn');
+    const nextBtn=document.getElementById('nextBtn');
+    const hudBar=document.getElementById('hudBar');
+    const hudText=document.getElementById('hudText');
+    const toast=document.getElementById('toast');
+
+    function getStages(){
+      const base=shared.map(x=>x&&({...x}));
+      base[1]=roleStages[state.role].stages[1];
+      base[2]=roleStages[state.role].stages[2];
+      return base;
+    }
+    function save(){localStorage.setItem(storageKey,JSON.stringify(state))}
+    function announce(text){toast.textContent=text;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}
+
+    function chooseRole(role){
+      state.role=role;
+      state.step=Math.min(Math.max(Number(state.step)||0,0),7);
+      save();
+      gate.hidden=true;
+      game.setAttribute('aria-hidden','false');
+      render();
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    document.querySelectorAll('[data-role]').forEach(btn=>btn.addEventListener('click',()=>chooseRole(btn.dataset.role)));
+    document.getElementById('switchRole').addEventListener('click',()=>{gate.hidden=false;game.setAttribute('aria-hidden','true')});
+
+    function renderNodes(stages){
+      nodesEl.innerHTML='';
+      stages.forEach((stage,i)=>{
+        const btn=document.createElement('button');
+        btn.type='button';
+        btn.className='route-node'+(i<state.step?' done':'')+(i===state.step?' current':'');
+        btn.style.left=positions[i].x+'%';btn.style.top=positions[i].y+'%';
+        btn.innerHTML=(i<state.step?'✓':String(i+1))+`<span>${stage.label}</span>`;
+        btn.setAttribute('aria-label',`第 ${i+1} 关：${stage.label}`);
+        btn.addEventListener('click',()=>moveTo(i));
+        nodesEl.appendChild(btn);
+      });
+    }
+    function render(){
+      const profile=roleStages[state.role];
+      const stages=getStages();
+      const stage=stages[state.step];
+      rolePill.textContent=profile.name;
+      rolePill.className='role-pill '+(state.role==='tourist'?'tourist':'');
+      routeSubtitle.textContent=profile.route;
+      avatar.className='avatar '+(state.role==='tourist'?'tourist':'');
+      avatar.style.left=positions[state.step].x+'%';
+      avatar.style.top=positions[state.step].y+'%';
+      renderNodes(stages);
+      missionId.textContent=`Mission ${String(state.step+1).padStart(2,'0')} · ${profile.name}`;
+      missionTitle.textContent=stage.title;
+      missionSub.textContent=stage.sub;
+      tip.innerHTML='<b>园区提示：</b> '+stage.tip;
+      source.href=stage.source;
+      taskList.innerHTML='';
+      const roleChecks=state.checks[state.role]||(state.checks[state.role]={});
+      const stepChecks=roleChecks[state.step]||(roleChecks[state.step]=[]);
+      stage.tasks.forEach((task,i)=>{
+        const item=document.createElement('div');item.className='task';
+        const id=`task-${state.role}-${state.step}-${i}`;
+        item.innerHTML=`<input id="${id}" type="checkbox" ${stepChecks[i]?'checked':''}><label for="${id}">${task[0]}<small>${task[1]}</small></label>`;
+        item.querySelector('input').addEventListener('change',e=>{stepChecks[i]=e.target.checked;save()});
+        taskList.appendChild(item);
+      });
+      prevBtn.disabled=state.step===0;
+      nextBtn.textContent=state.step===7?'完成模拟 ✓':'完成本关 →';
+      hudBar.style.width=((state.step+1)/8*100)+'%';
+      hudText.textContent=`关卡 ${state.step+1} / 8`;
+      save();
+    }
+    function moveTo(next){
+      if(next===state.step)return;
+      avatar.classList.add('walking');
+      state.step=Math.min(Math.max(next,0),7);
+      render();
+      setTimeout(()=>avatar.classList.remove('walking'),950);
+    }
+    prevBtn.addEventListener('click',()=>moveTo(state.step-1));
+    nextBtn.addEventListener('click',()=>{
+      if(state.step===7){announce('模拟完成！请以官方清单准备真实申请。');return}
+      moveTo(state.step+1);
+    });
+    document.getElementById('clearData').addEventListener('click',()=>{
+      localStorage.removeItem(storageKey);
+      state={role:null,step:0,checks:{mice:{},tourist:{}}};
+      announce('本机匿名进度已清除');
+      gate.hidden=false;game.setAttribute('aria-hidden','true');
+    });
+
+    // 每次进入都先显示角色选择；不自动读取或请求任何身份信息。
+    gate.hidden=false;
+  </script>
+</body>
+</html>

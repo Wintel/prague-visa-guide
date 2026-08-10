@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="中国普通护照情侣同行捷克：一人参加会议申请 MICE，一人陪同旅游申请 Tourism 的短期申根签证逐步指南。">
+  <title>布拉格申根签证｜参会 + 同行旅游双申请指南</title>
+  <style>
+    :root {
+      --ink: #18221f;
+      --muted: #64706b;
+      --paper: #f6f2e9;
+      --card: #fffdf8;
+      --green: #183f36;
+      --green-2: #246253;
+      --red: #a84b3f;
+      --gold: #c49a52;
+      --line: #ded8ca;
+      --soft-green: #e8f0ec;
+      --soft-red: #f6e9e5;
+      --shadow: 0 18px 50px rgba(31, 43, 38, .09);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 5%, rgba(196,154,82,.16), transparent 25rem),
+        radial-gradient(circle at 93% 25%, rgba(36,98,83,.10), transparent 28rem),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+    }
+
+    a { color: var(--green-2); text-underline-offset: 3px; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .wrap { width: min(1160px, calc(100% - 36px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(222,216,202,.88);
+      background: rgba(246,242,233,.88);
+      backdrop-filter: blur(14px);
+    }
+    .nav {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { font-weight: 800; letter-spacing: -.03em; color: var(--green); }
+    .navlinks { display: flex; gap: 20px; font-size: 14px; }
+    .navlinks a { color: var(--ink); text-decoration: none; }
+    .print-btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      padding: 7px 13px;
+      color: var(--green);
+    }
+
+    .hero { padding: 76px 0 44px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(36,98,83,.25);
+      border-radius: 999px;
+      background: rgba(232,240,236,.75);
+      padding: 6px 12px;
+      color: var(--green-2);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .05em;
+    }
+    h1, h2, h3 { line-height: 1.18; letter-spacing: -.035em; }
+    h1 { max-width: 870px; margin: 18px 0 18px; font-size: clamp(42px, 7vw, 78px); }
+    h1 em { color: var(--red); font-style: normal; }
+    .lead { max-width: 760px; margin: 0; color: #4e5a55; font-size: clamp(17px, 2vw, 21px); }
+    .hero-grid { display: grid; grid-template-columns: 1.45fr .75fr; gap: 28px; align-items: end; }
+    .stamp {
+      position: relative;
+      overflow: hidden;
+      min-height: 230px;
+      padding: 28px;
+      border-radius: 28px;
+      color: white;
+      background: var(--green);
+      box-shadow: var(--shadow);
+    }
+    .stamp::after {
+      content: "PRG";
+      position: absolute;
+      right: -10px;
+      bottom: -50px;
+      color: rgba(255,255,255,.07);
+      font-weight: 900;
+      font-size: 150px;
+      letter-spacing: -.08em;
+    }
+    .stamp small { opacity: .68; text-transform: uppercase; letter-spacing: .14em; }
+    .stamp strong { display: block; margin-top: 26px; font-size: 32px; line-height: 1.1; }
+    .stamp p { position: relative; z-index: 1; margin: 24px 0 0; color: rgba(255,255,255,.76); }
+
+    .quick {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 34px 0 0;
+    }
+    .quick div { padding: 16px 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,253,248,.72); }
+    .quick b { display: block; color: var(--green); font-size: 17px; }
+    .quick span { color: var(--muted); font-size: 13px; }
+
+    main { padding-bottom: 80px; }
+    section { scroll-margin-top: 84px; margin-top: 72px; }
+    .section-head { display: grid; grid-template-columns: .55fr 1fr; gap: 36px; margin-bottom: 28px; }
+    .section-head h2 { margin: 0; color: var(--green); font-size: clamp(30px, 4vw, 46px); }
+    .section-head p { margin: 4px 0 0; color: var(--muted); }
+    .kicker { color: var(--red); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+
+    .notice {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      padding: 18px 20px;
+      border: 1px solid #e7c3ba;
+      border-radius: 16px;
+      background: var(--soft-red);
+    }
+    .notice .icon { font-size: 22px; }
+    .notice strong { color: #7e342b; }
+    .notice p { margin: 2px 0 0; color: #694d47; }
+
+    .decision { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+    .decision article, .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: 0 7px 25px rgba(31,43,38,.04);
+    }
+    .decision article { padding: 22px; }
+    .decision .num {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--green);
+      font-weight: 800;
+    }
+    .decision h3 { margin: 16px 0 8px; font-size: 18px; }
+    .decision p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .planner { display: grid; grid-template-columns: .8fr 1.2fr; overflow: hidden; }
+    .planner-input { padding: 32px; color: white; background: var(--green); }
+    .planner-input h3 { margin: 0 0 10px; font-size: 26px; }
+    .planner-input p { color: rgba(255,255,255,.7); }
+    .planner-input label { display: block; margin: 24px 0 8px; font-size: 14px; font-weight: 700; }
+    .planner-input input {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 13px 14px;
+      color: var(--ink);
+      background: white;
+    }
+    .planner-output { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 28px; }
+    .datebox { padding: 17px; border: 1px solid var(--line); border-radius: 14px; background: #fbfaf6; }
+    .datebox span { display: block; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .datebox strong { display: block; margin-top: 4px; color: var(--green); font-size: 20px; }
+    .datebox.wide { grid-column: 1 / -1; background: var(--soft-green); }
+
+    .steps { position: relative; display: grid; gap: 18px; }
+    .step { display: grid; grid-template-columns: 76px 1fr; gap: 18px; }
+    .step-no {
+      display: grid;
+      width: 58px;
+      height: 58px;
+      place-items: center;
+      border: 1px solid rgba(36,98,83,.25);
+      border-radius: 18px;
+      color: var(--green);
+      background: var(--soft-green);
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .step-body { padding: 25px 28px; }
+    .step h3 { margin: 0 0 7px; color: var(--green); font-size: 24px; }
+    .step p { margin: 8px 0; color: #4e5955; }
+    .step ul { margin: 10px 0 0; padding-left: 20px; color: #4e5955; }
+    .step .action {
+      display: inline-flex;
+      margin-top: 12px;
+      border-radius: 999px;
+      padding: 8px 13px;
+      color: white;
+      background: var(--green-2);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .micro { color: var(--muted); font-size: 13px; }
+    sup a { color: var(--red); font-weight: 800; text-decoration: none; }
+
+    .check-wrap { padding: 30px; }
+    .progress-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
+    .progress-row h3 { margin: 0; color: var(--green); font-size: 26px; }
+    .progress-label { color: var(--muted); font-size: 13px; }
+    .progress { overflow: hidden; height: 9px; margin-bottom: 28px; border-radius: 999px; background: #e8e4db; }
+    .progress i { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--green-2), var(--gold)); transition: width .25s ease; }
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .check-group h4 { margin: 0 0 12px; color: var(--red); font-size: 14px; letter-spacing: .08em; }
+    .check-item {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 9px 0;
+      border-bottom: 1px dashed #e3ded2;
+    }
+    .check-item input { width: 17px; height: 17px; margin-top: 4px; accent-color: var(--green-2); }
+    .check-item label { cursor: pointer; }
+    .check-item small { display: block; color: var(--muted); }
+    .reset { border: 0; color: var(--red); background: transparent; font-size: 13px; }
+
+    .profile-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 18px; }
+    .profile-tabs button { border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; color: var(--ink); background: var(--card); }
+    .profile-tabs button[aria-selected="true"] { color: white; border-color: var(--green); background: var(--green); }
+    .profile-panel { display: none; padding: 22px 24px; }
+    .profile-panel.active { display: block; }
+    .profile-panel h3 { margin: 0 0 9px; color: var(--green); }
+    .profile-panel p, .profile-panel ul { margin-top: 8px; color: #4e5955; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .info-card { padding: 24px; }
+    .info-card h3 { margin: 0 0 14px; color: var(--green); font-size: 21px; }
+    .info-card p { color: var(--muted); }
+    .info-card dl { margin: 0; }
+    .info-card dt { margin-top: 13px; font-weight: 800; }
+    .info-card dd { margin: 2px 0 0; color: var(--muted); }
+
+    .route-tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: white;
+      background: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+    }
+    .route-tag.green { background: var(--green-2); }
+    .joint-box {
+      margin-top: 16px;
+      padding: 24px;
+      border: 1px solid rgba(196,154,82,.45);
+      border-radius: var(--radius);
+      background: #faf3e5;
+    }
+    .joint-box h3 { margin: 0 0 10px; color: #76571e; }
+    .joint-box ul { margin-bottom: 0; color: #5f594c; }
+
+    .pitfalls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .pitfall { padding: 21px; border-left: 4px solid var(--red); }
+    .pitfall b { color: var(--red); }
+    .pitfall p { margin: 5px 0 0; color: var(--muted); font-size: 14px; }
+
+    .sources { padding: 30px; }
+    .sources ol { margin: 0; padding-left: 24px; columns: 2; column-gap: 46px; }
+    .sources li { break-inside: avoid; margin: 0 0 15px; color: var(--muted); font-size: 14px; }
+    .sources a { font-weight: 700; }
+
+    .final-note { margin-top: 24px; padding: 20px; border-radius: 16px; color: #605f57; background: #ece8df; font-size: 13px; }
+    footer { padding: 28px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 820px) {
+      .navlinks { display: none; }
+      .hero { padding-top: 48px; }
+      .hero-grid, .section-head, .planner, .two-col { grid-template-columns: 1fr; }
+      .quick { grid-template-columns: 1fr 1fr; }
+      .decision { grid-template-columns: 1fr; }
+      .check-grid { grid-template-columns: 1fr; gap: 18px; }
+      .pitfalls { grid-template-columns: 1fr; }
+      .sources ol { columns: 1; }
+    }
+    @media (max-width: 520px) {
+      .wrap { width: min(100% - 24px, 1160px); }
+      h1 { font-size: 42px; }
+      .quick { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 48px 1fr; gap: 10px; }
+      .step-no { width: 44px; height: 44px; border-radius: 13px; }
+      .step-body, .check-wrap, .sources { padding: 20px; }
+      .planner-output { grid-template-columns: 1fr; padding: 20px; }
+      .datebox.wide { grid-column: auto; }
+    }
+
+    @media print {
+      body { background: white; font-size: 11pt; }
+      .topbar, .print-btn, .profile-tabs, .reset { display: none !important; }
+      .wrap { width: 100%; }
+      .hero { padding: 0 0 20px; }
+      h1 { font-size: 34pt; }
+      section { margin-top: 32px; break-inside: avoid; }
+      .stamp, .planner-input { color: black; background: white; border: 1px solid #bbb; box-shadow: none; }
+      .stamp p, .planner-input p { color: #555; }
+      .card, .decision article { box-shadow: none; }
+      .profile-panel { display: block; margin-bottom: 10px; }
+      a { color: black; word-break: break-word; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">PRAGUE / VISA</div>
+      <nav class="navlinks" aria-label="页面导航">
+        <a href="#fit">先判断</a>
+        <a href="#couple">双申请</a>
+        <a href="#timeline">时间线</a>
+        <a href="#steps">步骤</a>
+        <a href="#documents">材料</a>
+        <a href="#sources">来源</a>
+      </nav>
+      <button class="print-btn" type="button" onclick="window.print()">打印 / 存 PDF</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">中国普通护照 · 参会 + 同行旅游 · 90 天以内</span>
+          <h1>去布拉格，申根签证<br><em>一步一步办。</em></h1>
+          <p class="lead">你参加会议，按 MICE（会议会展）准备；女朋友不参会、只是陪同旅行，按 Tourism（个人旅游）准备。两份申请目的不同，但行程可以互相印证。</p>
+        </div>
+        <aside class="stamp" aria-label="指南摘要">
+          <small>Research edition</small>
+          <strong>捷克共和国<br>Schengen C</strong>
+          <p>资料核对日期：2026-08-10<br>最终要求以递交当日官方页面为准</p>
+        </aside>
+      </div>
+      <div class="quick" aria-label="关键信息">
+        <div><b>€90</b><span>12 岁及以上签证费</span></div>
+        <div><b>最早提前 6 个月</b><span>可递交申请</span></div>
+        <div><b>通常 15 日</b><span>领馆审理，个案可至 45 日</span></div>
+        <div><b>90 / 180</b><span>申根短期停留上限</span></div>
+      </div>
+    </header>
+
+    <main>
+      <section id="fit">
+        <div class="section-head">
+          <div><span class="kicker">Step zero</span><h2>先确认：该向捷克申请吗？</h2></div>
+          <p>“从布拉格入境”不自动等于向捷克申请。受理国看的是目的地、停留天数和主要旅行目的；递错国家可能不予受理。<sup><a href="#s1">1</a></sup></p>
+        </div>
+        <div class="decision">
+          <article>
+            <span class="num">1</span>
+            <h3>只去捷克</h3>
+            <p>向捷克申请。布拉格、克鲁姆洛夫、卡罗维发利等都属于捷克境内。</p>
+          </article>
+          <article>
+            <span class="num">2</span>
+            <h3>去多个申根国</h3>
+            <p>向主要目的地国申请：通常是停留天数最长，或主要旅行目的所在国。</p>
+          </article>
+          <article>
+            <span class="num">3</span>
+            <h3>无法判断主要目的地</h3>
+            <p>各国天数和目的完全相同且无主次时，才看首次进入申根区的国家。</p>
+          </article>
+        </div>
+        <div class="notice" style="margin-top:18px">
+          <div class="icon">⚑</div>
+          <div><strong>不要“签证购物”</strong><p>签发后如机票、住宿或主要行程发生重大变化，应按使馆要求告知；材料与真实行程明显不符，签证可能被撤销，边检也可要求出示住宿、返程、保险和资金证明。<sup><a href="#s1">1</a></sup></p></div>
+        </div>
+      </section>
+
+      <section id="couple">
+        <div class="section-head">
+          <div><span class="kicker">Your case</span><h2>你们要走两条申请路径</h2></div>
+          <p>签证类别按每个人真实、主要的旅行目的选择。你不能因为女朋友走旅游签，就把自己的会议目的也写成旅游；会议邀请函、单位派遣函和表格目的应互相一致。<sup><a href="#s3">3</a></sup></p>
+        </div>
+        <div class="two-col">
+          <article class="card info-card">
+            <span class="route-tag">你 · MICE</span>
+            <h3>会议 / 会展申请</h3>
+            <p>预约类别选择 MICE / Meetings, Incentives, Conferences, Exhibitions（以 VFS 系统实际名称为准）。在公共材料之外，重点准备：</p>
+            <ul>
+              <li><b>捷克会议主办方邀请函：</b>官方抬头纸、盖章并签字，写明机构地址与联系方式、签字人姓名职务、访问目的和时长、详细日程、谁承担旅行与生活费用，以及担保人是否为你回国提供经济担保。</li>
+              <li><b>偿付能力：</b>你的最近 3 个月活期银行流水；清单同时要求雇佣公司的偿付能力证明。</li>
+              <li><b>雇主证明：</b>公司营业执照盖章复印件；若是在校学生，则提交学校盖章签字证明或可在线核验的学籍材料。</li>
+              <li><b>单位派遣函：</b>官方抬头纸、盖章签字，包含公司地址与联系人、签字人姓名职务、你的姓名/职位/工资/工龄、出行目的、回国后保留职位，以及费用承担方。</li>
+              <li>往返航班预订单和覆盖全程的住宿证明。</li>
+            </ul>
+          </article>
+          <article class="card info-card">
+            <span class="route-tag green">女朋友 · TOURISM</span>
+            <h3>个人旅游申请</h3>
+            <p>她不参加会议、没有会议邀请，就按 Tourism / Individual Tourism 申请。重点准备：</p>
+            <ul>
+              <li>往返航班预订单、覆盖全程的住宿证明、逐日旅游行程。</li>
+              <li>最近 3 个月本人活期银行流水。</li>
+              <li>与本人身份相符的在职、退休、无业或学生材料。</li>
+              <li>公共材料：申请表、护照、户口簿、照片、保险、预约信和 VFS 同意书。</li>
+              <li>申请表与说明信如实写“与男朋友同行旅游”；不要把她写成参会人，除非她确实受邀或注册参会。</li>
+            </ul>
+          </article>
+        </div>
+        <div class="joint-box">
+          <h3>两份申请怎样放在一起才清楚</h3>
+          <ul>
+            <li><b>各自独立：</b>每人一份申请表、预约、护照、保险、银行流水、职业证明和签证费；不能共用一套原件代替。</li>
+            <li><b>可以一致：</b>往返航班、旅游日期、酒店和非会议时段的游览安排可以相同。酒店确认单最好同时显示两人姓名。</li>
+            <li><b>建议互相说明：</b>各写一页简短英文 cover letter，说明你们同行、各自申请目的，并列出对方姓名和护照号。这是帮助解释行程的建议，不替代官方必交材料。</li>
+            <li><b>费用要说清：</b>谁支付谁的机票、住宿和生活费，必须与邀请函、派遣函、银行流水及申请表一致。若她由你资助，应如实附资助说明和相应财力证明；不能一处写自费、另一处写单位或伴侣支付。</li>
+            <li><b>关系证明：</b>未婚情侣不是“配偶”。旅游清单没有把情侣关系公证列为常规必交项；可用共同机酒和说明信解释同行关系，不要选择“探亲访友”冒充婚姻关系。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="timeline">
+        <div class="section-head">
+          <div><span class="kicker">Timing</span><h2>按出发日倒推</h2></div>
+          <p>法规允许最早提前 6 个月递交；一般不晚于出发前 15 天。实操建议留出预约、补件、护照运输和节假日缓冲。<sup><a href="#s4">4</a></sup><sup><a href="#s8">8</a></sup></p>
+        </div>
+        <div class="planner card">
+          <div class="planner-input">
+            <h3>你的出发日期</h3>
+            <p>选一个日期，自动生成准备窗口。这里的“推荐”是风险缓冲建议，不是官方承诺。</p>
+            <label for="departDate">计划离开中国 / 进入申根区日期</label>
+            <input id="departDate" type="date">
+          </div>
+          <div class="planner-output" aria-live="polite">
+            <div class="datebox"><span>最早可递交</span><strong id="earliest">选择日期后显示</strong></div>
+            <div class="datebox"><span>一般最晚递交</span><strong id="latest">—</strong></div>
+            <div class="datebox wide"><span>建议瞄准的递交窗口</span><strong id="recommended">出发前约 4–8 周</strong></div>
+            <div class="datebox wide"><span>注意</span><div class="micro">正常决定通常为领馆收到申请后 15 个日历日；需要进一步审查时可延至最多 45 日。VFS 转送与护照返还另需时间。</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="steps">
+        <div class="section-head">
+          <div><span class="kicker">The process</span><h2>8 步办完</h2></div>
+          <p>以下是两人共用的办理流程；材料环节分开使用 MICE 和 Tourism 清单。商务、探亲访友、文化体育、短期工作等其他目的不能硬套。</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-no">01</div>
+            <div class="step-body card">
+              <h3>确定签证类型与申请国</h3>
+              <p>你们都申请短期申根签证 Type C，但子类别不同：你选 MICE，女朋友选 Tourism。超过 90 天才属于捷克国家长期签证，不适用本指南。<sup><a href="#s9">9</a></sup></p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-no">02</div>
+            <div class="step-body card">
+              <h3>做一套相互一致的真实行程</h3>
+              <ul>
+                <li>列出每日城市、景点、城际交通和住宿；多国行程写清跨境交通。</li>
+                <li>准备往返航班预订单、覆盖全部停留夜晚的住宿证明。</li>
+                <li>姓名、日期、城市、入境次数在申请表、行程、机酒、保险、在职证明中保持一致。</li>
+              </ul>
+              <p class="micro">官方要求的是航班“预订单”；在签证结果出来前，优先选择可取消或可改的真实预订，避免使用虚假订单。<sup><a href="#s2">2</a></sup></p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-no">03</div>
+            <div class="step-body card">
+              <h3>下载表格，按当前清单备齐材料</h3>
+              <p>两人分别用英文填写短期申根申请表，建议蓝色笔签名，签名与护照一致；同时下载并签署 VFS 个人信息处理同意书。你的纸质材料按 MICE 清单整理，女朋友按 Tourism 清单整理。<sup><a href="#s2">2</a></sup><sup><a href="#s3">3</a></sup></p>
+              <a class="action" href="https://mzv.gov.cz/file/472194/Application_for_for_Schengen_Visa_up_to_90_days.pdf" target="_blank" rel="noopener">下载中英申请表 ↗</a>
+              <a class="action" href="https://mzv.gov.cz/file/5648562/Checklist_for_Tourism_Czech_Republic_sanitized_.docx" target="_blank" rel="noopener">下载官方 Tourism 清单 ↗</a>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-no">04</div>
+            <div class="step-body card">
+              <h3>按领区选择 VFS 中心</h3>
+              <p><b>上海领区：</b>上海、江苏、安徽、浙江，可选上海、杭州、南京中心；按户口、居住证或社保记录判断领区。</p>
+              <p><b>北京领区：</b>中国大陆其余省区市，可选北京、广州、深圳、西安、武汉、济南、长沙、沈阳、福州、成都、重庆、昆明中心；VFS 要求按护照出生地、户口或居住证所对应的规则递交。<sup><a href="#s5">5</a></sup></p>
+              <a class="action" href="https://visa.vfsglobal.com/chn/en/cze/attend-centre" target="_blank" rel="noopener">查看各中心地址与开放日 ↗</a>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-no">05</div>
+            <div class="step-body card">
+              <h3>在线预约</h3>
+              <p>每位申请人（包括同行家人）分别预约，选择正确领区、中心和 Tourism 类别，保存预约确认信。北京领区自 <b>2026-05-01</b> 起取消个人无预约递交，预约时需预付 VFS 服务费。<sup><a href="#s6">6</a></sup></p>
+              <a class="action" href="https://visa.vfsglobal.com/chn/en/cze/book-an-appointment" target="_blank" rel="noopener">进入 VFS 预约入口 ↗</a>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-no">06</div>
+            <div class="step-body card">
+              <h3>按时到场递交与采集生物信息</h3>
+              <p>建议提前 15 分钟到达，携带预约信、申请表、护照、原件与复印件。现场提交十指指纹和数码照片；12 岁以下免录指纹，但仍需按 VFS 当前要求本人到中心采集面部照片。此前录入 VIS 且未满 59 个月，指纹通常可复用，但领馆仍可要求重新采集。<sup><a href="#s5">5</a></sup><sup><a href="#s10">10</a></sup></p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-no">07</div>
+            <div class="step-body card">
+              <h3>缴费、留好收据、在线查询</h3>
+              <p>成人及 12 岁以上签证费为 €90；6–11 岁为 €45；未满 6 岁免签证费。以受理点通知的人民币金额和支付方式为准。签证费是对申请审理收费，拒签也不退；另有 VFS 服务费，可选快递等增值服务不影响审理速度或结果。<sup><a href="#s7">7</a></sup></p>
+              <a class="action" href="https://visa.vfsglobal.com/chn/en/cze/track-application" target="_blank" rel="noopener">查询申请状态 ↗</a>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-no">08</div>
+            <div class="step-body card">
+              <h3>取护照并逐项检查签证贴纸</h3>
+              <p>核对姓名、护照号、有效期（FROM / UNTIL）、入境次数（01 / 02 / MULT）和允许停留天数（DURATION OF STAY）。发现错误立即联系受理中心。出发时随身携带机酒、行程、保险和资金证明；有签证不代表自动获准入境。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="documents">
+        <div class="section-head">
+          <div><span class="kicker">Tourism checklist</span><h2>女朋友的材料打勾清单</h2></div>
+          <p>下方是 Tourism 申请清单；你的 MICE 专属材料见上方“双申请”部分。勾选进度只保存在当前浏览器，不会上传。领馆可要求补件或面谈。<sup><a href="#s3">3</a></sup></p>
+        </div>
+        <div class="card check-wrap">
+          <div class="progress-row">
+            <div><h3>她的旅游签材料包</h3><span class="progress-label" id="progressText">0 / 14 已完成</span></div>
+            <button class="reset" id="resetChecks" type="button">清空勾选</button>
+          </div>
+          <div class="progress"><i id="progressBar"></i></div>
+          <div class="check-grid">
+            <div class="check-group">
+              <h4>A · 公共材料</h4>
+              <div class="check-item"><input type="checkbox" id="c1"><label for="c1">短期申根申请表原件<small>英文填写；本人在尾页最后一栏签名，签名与护照一致</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c2"><label for="c2">近 6 个月白底证件照 1 张<small>3.5 × 4.5 cm，正面免冠、不戴眼镜</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c3"><label for="c3">护照原件与复印件<small>离开申根后至少有效 3 个月、至少 2 页完整空白页、签发未满 10 年；复印信息页、签名页及指定国家旧签证页</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c4"><label for="c4">户口簿原件及整本复印件<small>原件仅出示；整本含户主页和所有成员信息页，不需翻译</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c5"><label for="c5">申根旅行医疗保险<small>覆盖全部申根国和整个停留期，保额至少 €30,000，含急诊医疗、医疗遣返及死亡遗体遣返；以护照信息购买</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c6"><label for="c6">预约确认信 + VFS 同意书<small>打印并按要求签名</small></label></div>
+            </div>
+            <div class="check-group">
+              <h4>B · 旅游与财力材料</h4>
+              <div class="check-item"><input type="checkbox" id="c7"><label for="c7">往返航班预订单<small>姓名和日期与申请表一致</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c8"><label for="c8">全程住宿证明<small>覆盖申根区每一晚；多人入住应体现申请人姓名</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c9"><label for="c9">英文旅行计划<small>每日城市、交通、景点和酒店；多国行程附申根区内交通预订</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c10"><label for="c10">最近 3 个月银行流水<small>活期账户对账单，不是定期存款证明；收入与余额能合理覆盖行程</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c11"><label for="c11">与职业身份相符的证明<small>在职 / 退休 / 无业 / 未成年对应材料，见下方</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c12"><label for="c12">材料日期与拼写一致性复核<small>护照拼音、出入境日期、住宿夜数、保险期限、请假期一致</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c13"><label for="c13">原件与复印件分组、按清单排序<small>补充一份个人材料目录，便于受理</small></label></div>
+              <div class="check-item"><input type="checkbox" id="c14"><label for="c14">递交日支付与取件安排<small>确认当前签证费人民币金额、VFS 服务费、支付方式和取件/快递选项</small></label></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-tabs" role="tablist" aria-label="身份附加材料">
+          <button type="button" role="tab" aria-selected="true" data-panel="employee">在职人员</button>
+          <button type="button" role="tab" aria-selected="false" data-panel="retired">退休人员</button>
+          <button type="button" role="tab" aria-selected="false" data-panel="unemployed">无业人员</button>
+          <button type="button" role="tab" aria-selected="false" data-panel="minor">未成年人</button>
+        </div>
+        <div class="profile-panel card active" id="employee">
+          <h3>在职人员附加材料</h3>
+          <ul><li>雇主营业执照盖章复印件。</li><li>单位抬头纸在职及准假证明：英文，或中文附英文翻译；包含公司地址/电话/传真、签字人姓名与职务、申请人姓名/职位/工资/工作年限、获准休假日期，并有日期、签字和公章。</li></ul>
+        </div>
+        <div class="profile-panel card" id="retired">
+          <h3>退休人员附加材料</h3>
+          <p>提交养老金证明或其他固定收入证明，并确保银行流水能体现相关入账。</p>
+        </div>
+        <div class="profile-panel card" id="unemployed">
+          <h3>无业人员附加材料</h3>
+          <ul><li>已婚：配偶在职及收入证明 + 结婚关系公证书及海牙认证。</li><li>未婚、离异、丧偶：其他固定收入证明。</li></ul>
+        </div>
+        <div class="profile-panel card" id="minor">
+          <h3>未成年人附加材料</h3>
+          <ul><li>学生证复印件、学校证明原件（学校地址/电话、准假、批准人姓名与职务）。</li><li>亲属关系或监护证明公证书及海牙认证。</li><li>单独出行或仅随一方父母：按清单提交父母/监护人旅行同意公证及海牙认证；涉及单独监护时提交相应法院判决或授权文件及认证。</li><li>未成年人须本人到中心；申请表由父母或法定监护人签名。</li></ul>
+        </div>
+      </section>
+
+      <section id="jurisdiction">
+        <div class="section-head">
+          <div><span class="kicker">Fees & timing</span><h2>费用和审理时间</h2></div>
+          <p>人民币金额会受领馆汇率与 VFS 收费调整影响，因此不在这里写死。预约前和递交当天各核对一次官方页面。</p>
+        </div>
+        <div class="two-col">
+          <article class="card info-card">
+            <h3>基础费用</h3>
+            <dl>
+              <dt>12 岁及以上</dt><dd>签证费 €90</dd>
+              <dt>6–11 岁</dt><dd>签证费 €45</dd>
+              <dt>未满 6 岁</dt><dd>免签证费</dd>
+              <dt>另外</dt><dd>VFS 服务费；快递、短信、照相等增值服务为可选收费。北京领区在线预约时预付服务费。</dd>
+            </dl>
+          </article>
+          <article class="card info-card">
+            <h3>时间预期</h3>
+            <dl>
+              <dt>官方一般时限</dt><dd>领馆收到申请后 15 个日历日</dd>
+              <dt>进一步审查</dt><dd>个案可延长至最多 45 个日历日</dd>
+              <dt>实操缓冲</dt><dd>另加预约等待、VFS 转送、可能补件与护照返还时间；建议提前 4–8 周安排。</dd>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section id="pitfalls">
+        <div class="section-head">
+          <div><span class="kicker">Avoid these</span><h2>最容易出问题的地方</h2></div>
+          <p>签证官看的是整套材料能否形成可信、可验证、相互一致的故事，而不只是账户余额。</p>
+        </div>
+        <div class="pitfalls">
+          <article class="card pitfall"><b>申请国选错</b><p>捷克不是主要目的地，却因“布拉格好约”而向捷克递交。</p></article>
+          <article class="card pitfall"><b>机酒与表格日期打架</b><p>少订一晚、跨国交通缺失、保险晚一天生效，都会削弱可信度。</p></article>
+          <article class="card pitfall"><b>临时大额入账无解释</b><p>近 3 个月流水应体现稳定收支；异常资金准备来源说明和证明。</p></article>
+          <article class="card pitfall"><b>只交“存款证明”</b><p>旅游清单明确要最近 3 个月银行对账单，非定期存款账户。</p></article>
+          <article class="card pitfall"><b>在职证明信息不全</b><p>工资、年限、准假、公司联系方式、签字人职务、日期、公章缺一项都可能补件。</p></article>
+          <article class="card pitfall"><b>把付费服务当加急</b><p>贵宾厅、快递、填表协助不会提高获签率，也不改变领馆审理优先级。</p></article>
+        </div>
+      </section>
+
+      <section id="sources">
+        <div class="section-head">
+          <div><span class="kicker">Official sources</span><h2>官方复核入口</h2></div>
+          <p>本页优先采用捷克外交部、捷克驻华使领馆、捷克官方签证中心和欧盟法规。点击可核对递交当日是否有更新。</p>
+        </div>
+        <div class="card sources">
+          <ol>
+            <li id="s1"><a href="https://mzv.gov.cz/beijing/en/consular_information/visas_1/specific_for_destination/index.html" target="_blank" rel="noopener">捷克驻华使馆：按旅行目的的清单与正确申请国规则</a></li>
+            <li id="s2"><a href="https://mzv.gov.cz/file/5648562/Checklist_for_Tourism_Czech_Republic_sanitized_.docx" target="_blank" rel="noopener">捷克驻华使馆：个人旅游材料清单（DOCX）</a></li>
+            <li id="s3"><a href="https://visa.vfsglobal.com/one-pager/Czechrepublic/China/English/pdf/Checklist-for-short-stay-visas-in-China-Dec-25.pdf" target="_blank" rel="noopener">VFS / 捷克使领馆：中国短期签证补充清单（2025-12-01 版，中英 PDF）</a></li>
+            <li id="s4"><a href="https://visa.vfsglobal.com/chn/en/cze/apply-visa" target="_blank" rel="noopener">VFS 捷克中国：官方申请步骤</a></li>
+            <li id="s5"><a href="https://visa.vfsglobal.com/chn/en/cze/attend-centre/what-happens-at-centre" target="_blank" rel="noopener">VFS：领区、现场递交与生物信息规则</a></li>
+            <li id="s6"><a href="https://visa.vfsglobal.com/chn/zh/cze/news/walk-in-service-notice" target="_blank" rel="noopener">VFS：北京领区自 2026-05-01 起须在线预约并预付服务费</a></li>
+            <li id="s7"><a href="https://mzv.gov.cz/jnp/en/information_for_aliens/visa_fee_schedule/index.html" target="_blank" rel="noopener">捷克外交部：签证费标准</a></li>
+            <li id="s8"><a href="https://visa.vfsglobal.com/chn/en/cze/faq" target="_blank" rel="noopener">VFS 捷克中国：常见问题、最早递交与一般审理时间</a></li>
+            <li id="s9"><a href="https://home-affairs.ec.europa.eu/policies/schengen/visa-policy_en" target="_blank" rel="noopener">欧盟委员会：申根签证与 90/180 规则</a></li>
+            <li id="s10"><a href="https://eur-lex.europa.eu/eli/reg/2009/810" target="_blank" rel="noopener">EUR-Lex：欧盟签证法典（护照、生物信息、处理时限）</a></li>
+          </ol>
+        </div>
+        <div class="final-note"><b>边界说明：</b>本页按两名持中国大陆签发普通护照的未婚情侣设计：一人赴捷克参加会议，另一人陪同旅游，均在中国大陆申请且只去捷克。香港/澳门特区护照、外交护照、欧盟公民家属、ADS 团队、探亲访友、工作、长期居留或过境申请，规则与材料可能不同。它是一份操作指南，不是使领馆的批准保证或法律意见。</div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="wrap">Prague Schengen Visa Guide · researched 10 Aug 2026 · 请在付款和递交前再次打开官方链接核对。</div>
+  </footer>
+
+  <script>
+    const dateInput = document.getElementById('departDate');
+    const earliestEl = document.getElementById('earliest');
+    const latestEl = document.getElementById('latest');
+    const recommendedEl = document.getElementById('recommended');
+
+    function addDays(date, days) {
+      const d = new Date(date);
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+    function addMonthsClamped(date, months) {
+      const d = new Date(date);
+      const originalDay = d.getDate();
+      d.setDate(1);
+      d.setMonth(d.getMonth() + months);
+      const lastDay = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+      d.setDate(Math.min(originalDay, lastDay));
+      return d;
+    }
+    function fmt(date) {
+      return new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(date);
+    }
+    function updateDates() {
+      if (!dateInput.value) return;
+      const depart = new Date(dateInput.value + 'T12:00:00');
+      earliestEl.textContent = fmt(addMonthsClamped(depart, -6));
+      latestEl.textContent = fmt(addDays(depart, -15));
+      recommendedEl.textContent = fmt(addDays(depart, -56)) + ' — ' + fmt(addDays(depart, -28));
+      localStorage.setItem('prague-departure', dateInput.value);
+    }
+    const savedDate = localStorage.getItem('prague-departure');
+    if (savedDate) { dateInput.value = savedDate; updateDates(); }
+    dateInput.addEventListener('change', updateDates);
+
+    const checks = [...document.querySelectorAll('.check-item input[type="checkbox"]')];
+    const progressText = document.getElementById('progressText');
+    const progressBar = document.getElementById('progressBar');
+    function updateProgress() {
+      const done = checks.filter(c => c.checked).length;
+      progressText.textContent = `${done} / ${checks.length} 已完成`;
+      progressBar.style.width = `${done / checks.length * 100}%`;
+      localStorage.setItem('prague-checks', JSON.stringify(checks.map(c => c.checked)));
+    }
+    try {
+      const savedChecks = JSON.parse(localStorage.getItem('prague-checks'));
+      if (Array.isArray(savedChecks)) checks.forEach((c, i) => c.checked = Boolean(savedChecks[i]));
+    } catch (_) {}
+    checks.forEach(c => c.addEventListener('change', updateProgress));
+    document.getElementById('resetChecks').addEventListener('click', () => { checks.forEach(c => c.checked = false); updateProgress(); });
+    updateProgress();
+
+    const tabs = [...document.querySelectorAll('.profile-tabs button')];
+    const panels = [...document.querySelectorAll('.profile-panel')];
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById(tab.dataset.panel).classList.add('active');
+    }));
+  </script>
+</body>
+</html>
